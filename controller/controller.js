@@ -15,10 +15,10 @@ const getMeta = async (req, res, next) => {
         let metaObj = await cache.get(key, async () => {
             return await controllerHelper.getMetaObj(url);
         });
-        res.send(metaObj);
+        res.send({status: 200, metaObj: metaObj});
     } catch (e) {
         console.log("Error while Fetching metaData", e);
-        res.send(e)
+        res.send({status: 500, error: e})
     }
 };
 

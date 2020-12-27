@@ -1,6 +1,14 @@
-const assert = require('chai').assert;
+const chai = require('chai');
+let chaiHttp = require('chai-http');
 
+const app = require('../server');
 const controller = require('../controller/controller-helper');
+
+const assert = chai.assert;
+let should = chai.should();
+
+
+chai.use(chaiHttp);
 
 let url = 'https://www.imdb.com/title/tt1070874/?ref_=hm_tpks_tt_1_pd_tp1';
 
@@ -22,7 +30,12 @@ let metaData = {
         site_name: 'IMDb',
         description: 'Directed by Aaron Sorkin.  With Eddie Redmayne, Alex Sharp, Sacha Baron Cohen, Jeremy Strong. The story of 7 people on trial stemming from various charges surrounding the uprising at the 1968 Democratic National Convention in Chicago, Illinois.'
     }
-}
+};
+
+let InvalidMetaData = {
+    "input": "abc",
+    "code": "ERR_INVALID_URL"
+};
 
 describe('getMetaObj:: controller helper', async () => {
     it('app should return error', async () => {
@@ -34,5 +47,16 @@ describe('getMetaObj:: controller helper', async () => {
         let resp = await controller.getMetaObj(url);
         delete resp["request_id"];
         assert.deepEqual(resp, metaData);
-    })
+    });
+
+    it('Invalid url',  (done)=> {
+        chai.request(app)
+            .post('/fetchMeta')
+            .send('abc')
+            .end((err, res)=>{
+                res.should.have.status(200);
+                res.body.should.be.a('object');
+                done();
+            })
+    });
 });
