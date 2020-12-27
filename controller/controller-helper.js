@@ -19,8 +19,8 @@ const getMetaObj = async (url) => {
                 if (meta[key].attribs.property && meta[key].attribs.content) {
                     const prop = meta[key].attribs.property;
                     if (_.includes(prop, 'og:')) {
-                        let key = prop.replace('og:', '');
-                        if (key === 'image') {
+                        let modified_key = prop.replace('og:', '');
+                        if (modified_key === 'image') {
                             ogObj.image = _.get(ogObj, 'image', []).push(meta[key].attribs.content);
                         } else {
                             ogObj[prop.replace('og:', '')] = meta[key].attribs.content;
