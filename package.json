@@ -1,0 +1,25 @@
+{
+  "name": "urlScraper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha --timeout 10000|| true",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "chai": "^4.2.0",
+    "cheerio": "^1.0.0-rc.5",
+    "express": "^4.17.1",
+    "got": "^11.8.1",
+    "lodash": "^4.17.20",
+    "metascraper": "^5.16.0",
+    "mocha": "^8.2.1",
+    "node-cache": "^5.1.2",
+    "open-graph-scraper": "^4.7.1"
+  }
+}
