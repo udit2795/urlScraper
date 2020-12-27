@@ -33,7 +33,6 @@ describe('getMetaObj:: controller helper', async () => {
     it('app should return metadata', async () => {
         let resp = await controller.getMetaObj(url);
         delete resp["request_id"];
-        console.log("===>>>resp",resp);
         assert.deepEqual(resp, metaData);
     })
 });
